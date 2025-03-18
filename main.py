@@ -84,8 +84,8 @@ wybrana_funkcja = wybor_funkcji()
 poczatek_przedzialu, koniec_przedzialu = okreslenie_przedzialu(wybrana_funkcja)
 
 #Domyślne wartości
-e = 1e-8
-max_iteracje = 100
+e = 1e-10
+max_iteracje = 1000
 
 #Użytkownik wybiera kryterium zatrzymania algorytmu:
 print("Podaj kryterium zatrzymania algorytmu.")
@@ -120,8 +120,8 @@ plt.plot(x, y, label='Funkcja', color='blue')
 plt.axhline(0, color='black', linewidth=0.5, linestyle='--')
 
 # Oznaczenie znalezionych miejsc zerowych
-plt.scatter(x_bisekcja, wybrana_funkcja(x_bisekcja), color='red', label='Bisekcja', zorder=3)
-plt.scatter(x_regula_falsi, wybrana_funkcja(x_regula_falsi), color='green', label='Regula Falsi', zorder=3)
+plt.scatter(x_bisekcja, wybrana_funkcja(x_bisekcja), color='red', marker='x', label='Bisekcja', zorder=3)
+plt.scatter(x_regula_falsi, wybrana_funkcja(x_regula_falsi), color='green', marker='+', label='Regula Falsi', zorder=3)
 
 plt.xlabel('x')
 plt.ylabel('f(x)')
