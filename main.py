@@ -2,26 +2,27 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def funkcja_wielomianowa(x):
-    return x**3 - x - 2
+    return -2 * x ** 3 + 12 * x ** 2 + 16 * x
 
 def funkcja_trygonometryczna(x):
-    return np.sin(x) - 0.5
+    return 4 * np.sin(2 * x)
 
 def funkcja_wykladnicza(x):
-    return np.exp(x) - 3
+    return 4 ** x - 16
 
 def funkcja_zlozona(x):
-    return np.exp(x) * np.cos(x) - 2
+    z = 4 * np.sin(2 * x)
+    return -2 * z ** 3 + 12 * z ** 2 + 16 * z
 
 #Użytkownik wybiera funkcję (funkcje, które muszą być wbudowane: wielomian, f. tryg., f. wykładnicza, złożenie z poprzednich 3)
 def wybor_funkcji():
     funkcja = 0
     while funkcja not in [1,2,3,4]:
         print("Wybierz funkcję.")
-        print("1 - wielomian (x^3 - x - 2)")
-        print("2 - funkcja trygonometryczna (sin(x) - 0.5)")
-        print("3 - funkcja wykładnicza (e^x - 3)")
-        print("4 - złożenie funkcji (e^x * cos(x) - 2)")
+        print("1 - wielomian (-2x^3 + 12x^2 + 16x)")
+        print("2 - funkcja trygonometryczna (4sin(2x))")
+        print("3 - funkcja wykładnicza (4^x - 16)")
+        print("4 - złożenie funkcji (-2(4sin(2x))^3 + 12(4sin(2x))^2 + 16(4sin(2x)))")
         funkcja = int(input("Wybierz funkcję: "))
 
         if funkcja == 1:
