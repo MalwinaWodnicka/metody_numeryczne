@@ -36,6 +36,8 @@ def wybor_funkcji():
             return funkcja_zlozona
         else:
             print("Niepoprawny wybór funkcji.")
+    return None
+
 
 #Użytkownik określa przedział, na którym poszukiwane jest miejsce zerowe.
 def okreslenie_przedzialu(f):
@@ -47,6 +49,25 @@ def okreslenie_przedzialu(f):
         if f(a) * f(b) < 0:
             return a,b
         print("Przedział musi być unimodalny. Podaj wartości ponownie.")
+
+
+#Użytkownik wybiera kryterium zatrzymania algorytmu:
+def stop(e,i):
+    print("Podaj kryterium zatrzymania algorytmu.")
+    print("1 - Dokładność ε ((|xi−xi−1| < ε)")
+    print("2 - Liczba iteracji")
+    while True:
+        stop = int(input("Wybierz kryterium: "))
+        if stop == 1:
+            e = float(input("Podaj ε: "))
+            return e,i
+        elif stop == 2:
+            max_iteracje = int(input("Podaj maksymalną liczbę iteracji: "))
+            i = max_iteracje
+            return e,i
+        else:
+            print("Została podana zła wartość. Podaj wartość ponownie.")
+
 
 #0: Metoda bisekcji
 def bisekcja(f, a, b, e, i):
@@ -85,24 +106,12 @@ def regula_falsi(f, a, b, e, i):
 wybrana_funkcja = wybor_funkcji()
 poczatek_przedzialu, koniec_przedzialu = okreslenie_przedzialu(wybrana_funkcja)
 
+
 #Domyślne wartości
 e = 1e-10
 max_iteracje = 1000
 
-#Użytkownik wybiera kryterium zatrzymania algorytmu:
-print("Podaj kryterium zatrzymania algorytmu.")
-print("1 - Dokładność ε ((|xi−xi−1| < ε)")
-print("2 - Liczba iteracji")
-while True:
-    stop = int(input("Wybierz kryterium: "))
-    if stop == 1:
-        e = float(input("Podaj ε: "))
-        break
-    elif stop == 2:
-        max_iteracje = int(input("Podaj maksymalną liczbę iteracji: "))
-        break
-    else:
-        print("Została podana zła wartość. Podaj wartość ponownie.")
+e,max_iteracje = stop(e,max_iteracje)
 
 #Program wykonuje obliczenia metodami 03, wyświetla wyniki
 x_bisekcja, i_bisekcja = bisekcja(wybrana_funkcja, poczatek_przedzialu, koniec_przedzialu, e, max_iteracje)
