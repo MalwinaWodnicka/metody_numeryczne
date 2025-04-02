@@ -10,7 +10,6 @@
 
 # Sprawdzenie, czy podana macierz spełnia warunki zbieżności
 
-import os
 import numpy as np
 from tabulate import tabulate
 import fun2

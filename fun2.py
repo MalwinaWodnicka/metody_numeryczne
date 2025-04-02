@@ -1,6 +1,7 @@
 # Julia Dobroszek, Malwina Wodnicka 4
 import os
 import numpy as np
+from numpy.matlib import empty
 
 przyklady = {
     "ukladA.txt": "A",
@@ -20,7 +21,7 @@ def dane_z_pliku(nazwa_pliku):
     try:
         with open(sciezka, "r", encoding="utf-8") as f:
             linie = f.readlines()
-
+# dane z linii są ładowane do macierzy numpy
         dane = np.loadtxt(linie)
         macierz = dane[:, :-1]
         wektor = dane[:, -1]
@@ -29,20 +30,25 @@ def dane_z_pliku(nazwa_pliku):
         print(f"Błąd podczas wczytywania pliku {nazwa_pliku}: {e}")
         return None, None
 
+
 def wybor():
     dostepne_przyklady = set(przyklady.values())
     wybory = []
+    kontynuuj = True
 
-    while True:
+    while kontynuuj:
         wybor = input("Wybierz przykład (q aby zakończyć): ").upper()
-        if wybor == "Q":
-            break
+        if wybor == "Q" and len(wybory) > 0:
+            kontynuuj = False
+        elif wybor == "Q":
+            print("Wybierz przynajmniej jeden przykład.")
         elif wybor in dostepne_przyklady and wybor not in wybory:
             wybory.append(wybor)
         elif wybor in wybory:
             print("Ten przykład został już wybrany.")
         else:
             print("Wybierz istniejący przykład.")
+
     return wybory
 
 def stop():
