@@ -51,6 +51,34 @@ def wybor():
 
     return wybory
 
+
+def czy_oznaczona(przyklad, macierz, wektor):
+    try:
+        A = np.array(macierz, dtype=np.float64)
+        b = np.array(wektor, dtype=np.float64).flatten()
+
+        if A.ndim != 2 or b.ndim != 1 or A.shape[0] != b.shape[0]:
+            return f"\nNieprawidłowe wymiary macierzy/wektora dla przykładu: {przyklad}\n"
+
+        macierz_rozszerzona = np.column_stack((A, b))
+
+        rzad_A = np.linalg.matrix_rank(A)
+        rzad_rozszerzona = np.linalg.matrix_rank(macierz_rozszerzona)
+        n = A.shape[1]
+
+        if rzad_A < rzad_rozszerzona:
+            return f"\nUkład jest sprzeczny (brak rozwiązań) dla przykładu: {przyklad}\n"
+        elif rzad_A == rzad_rozszerzona:
+            if rzad_A < n:
+                return f"\nUkład jest nieoznaczony (nieskończenie wiele rozwiązań) dla przykładu: {przyklad}\n"
+            else:
+                return True
+        else:
+            return True
+
+    except Exception as e:
+        return f"\nBłąd podczas analizy układu {przyklad}: {str(e)}\n"
+
 def stop():
     print("Podaj kryterium zatrzymania algorytmu:")
     print("1 - Dokładność ε (|xi−xi−1| < ε)")
