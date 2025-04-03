@@ -32,11 +32,6 @@ def main():
 
     for plik in pliki:
         macierz, wektor = fun2.dane_z_pliku(plik)
-        print(
-            f"Typ macierzy: {type(macierz)}, Typ elementów: {macierz.dtype if isinstance(macierz, np.ndarray) else 'nie NumPy'}")
-        print(
-            f"Typ wektora: {type(wektor)}, Typ elementów: {wektor.dtype if isinstance(wektor, np.ndarray) else 'nie NumPy'}")
-
         if macierz is not None and wektor is not None:
             rozszerzona_macierz = np.hstack((macierz, wektor.reshape(-1, 1)))
             naglowki = [f"x{i + 1}" for i in range(macierz.shape[1])] + ["b"]
