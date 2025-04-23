@@ -12,7 +12,9 @@ def zlozona1(x):
 def zlozona2(x):
     return np.abs(-5 * x + 10)
 
-def wybierz_funkcje():
+def wybierz_funkcje(czy, nazwa):
+    if czy:
+        return int(nazwa[8])
     print("""
 Wybierz funkcję:
 [1] y = 3x + 2
@@ -47,6 +49,8 @@ def funkcja(f_id, x):
     elif f_id == 6:
         return zlozona2(x)
     return None
+
+
 
 
 def interpolacja_lagrange(x, x_vals, y_vals):
