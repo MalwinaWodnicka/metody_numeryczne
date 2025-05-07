@@ -52,6 +52,9 @@ def draw_function(function, a, b, nodes=[]):
 
 
 
+# Dzieli przedział na coraz więcej podprzedziałów (zaczynając od 3)
+# Oblicza wartość całki dla każdego podziału
+# Powtarza, aż różnica między kolejnymi przybliżeniami będzie mniejsza niż e
 
 def simpson(f, a, b, e, wage_function):
     prev_val = None
@@ -60,14 +63,14 @@ def simpson(f, a, b, e, wage_function):
 
     while prev_val is None or abs(prev_val - curr_val) >= e:
         prev_val = curr_val
-        h = (b - a) / nodes
+        h = (b - a) / nodes #szerokość podprzedziału
         sum = f(a) * wage_function(a)
         sum += f(b) * wage_function(b)
 
         for i in range(1, nodes + 1):
-            if i % 2 == 1:
+            if i % 2 == 1: #węzły środkowe
                 sum += 4 * f(a + i * h) * wage_function(a + i * h)
-            else:
+            else: #węzły pośrednie
                 sum += 2 * f(a + i * h) * wage_function(a + i * h)
 
         sum *= h
@@ -77,18 +80,20 @@ def simpson(f, a, b, e, wage_function):
         nodes += 2
     return curr_val, nodes
 
-
+# Wykorzystuje n węzłów będących pierwiastkami wielomianów Czebyszewa
+# Oblicza przybliżenie całki z funkcji ważonej 1/√(1-x²)
 def gauss_czebyszew(f, n):
     sum = 0
-    A = pi / (n + 1)
+    A = pi / (n + 1) #waga kwadratury (stała dla wszystkich węzłów w tej metodzie)
     nodes = []
     for i in range(0, n + 1):
-        x = cos(((2 * i + 1) * pi) / (2 * n + 2))
+        x = cos(((2 * i + 1) * pi) / (2 * n + 2)) #pierwiastek wielomianu czybyszewa: węzeł
         nodes.append(x)
         sum += A * f(x)
     return sum, nodes
 
-
+# Oblicza całkę w przedziale [-1, 1] metodą adaptacyjną
+# Dzieli przedział na mniejsze fragmenty aż do osiągnięcia żądanej dokładności
 def simpson_limit(func, epsilon: float, wage_function) -> float:
     a = 0
     b = 0.5
