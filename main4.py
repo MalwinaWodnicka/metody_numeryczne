@@ -42,7 +42,7 @@ def main():
             print("Nie ma takiej opcji w menu")
             method_choice = None
     if int(method_choice) == 1:
-        wage_function = lambda x: ((1-x)*(1/2))
+        wage_function = lambda x: (1/((1-x**2)**(1/2)))
         a = -1
         b = 1
         while float(e) <= 0:
@@ -55,7 +55,7 @@ def main():
             result = fun4.gauss_czebyszew(chosen_function, n)
             print(f"Wynik dla {n} węzłów: {round(result[0],5)}")
             nodes = result[1]
-            fun4.draw_function(fun4.Function(lambda x: chosen_function(x) / sqrt(1 - x ** 2)), float(a), float(b), nodes)
+            fun4.draw_function(fun4.Function(lambda x: chosen_function(x) / (1/sqrt(1 - x ** 2))), float(a), float(b), nodes)
 
 
 if __name__ == '__main__':
