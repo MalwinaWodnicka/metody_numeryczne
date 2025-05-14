@@ -48,7 +48,9 @@ def main():
         while float(e) <= 0:
             print("Podaj dokladnosc")
             e = input("\t>>>>")
-        print(fun4.simpson_limit(chosen_function, float(e), wage_function))
+        result, nodes = fun4.simpson_limit(chosen_function, float(e), wage_function)
+        print(result)
+        fun4.draw_function2(chosen_function, -1, 1, nodes)
     else:
         a, b = -0.99, 0.99
         for n in range(2, 6):
