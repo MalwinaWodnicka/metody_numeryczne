@@ -8,13 +8,10 @@ from math import cos, pi, sin, sqrt
 
 def main():
     functions = [
-        ("1", fun4.Function(lambda x: 1)),
         ("x^2 + 2", fun4.Function(lambda x: x ** 2 + 2)),
         ("sin(x)", fun4.Function(lambda x: sin(x))),
         ("x^5 + 3x^4 + x^2 + 1", fun4.Function(lambda x: x ** 5 + 3 * x ** 4 + x ** 2 + 1)),
         ("1 +  1 / (1 + 25x^2)", fun4.Function(lambda x: 1 + 1 / (1 + 25 * x**2))),
-        ("|1 / x|", fun4.Function(lambda x: abs(1 / x))),
-        ("1 / sqrt(1 - x^2)", fun4.Function(lambda x: 1 / sqrt(1 - x**2))),
         ("|sin(x * 10 pi)|", fun4.Function(lambda x: abs(sin(x * 10 * pi))))
     ]
 
@@ -50,14 +47,14 @@ def main():
             e = input("\t>>>>")
         result, nodes = fun4.simpson_limit(chosen_function, float(e), wage_function)
         print(result)
-        fun4.draw_function2(chosen_function, -1, 1, nodes)
+        fun4.draw_function2(chosen_function, a, b, nodes)
     else:
         a, b = -0.99, 0.99
         for n in range(2, 6):
             result = fun4.gauss_czebyszew(chosen_function, n)
             print(f"Wynik dla {n} węzłów: {round(result[0],5)}")
             nodes = result[1]
-            fun4.draw_function(fun4.Function(lambda x: chosen_function(x) / (1/sqrt(1 - x ** 2))), float(a), float(b), nodes)
+            fun4.draw_function(fun4.Function(lambda x: chosen_function(x)), float(a), float(b), nodes)
 
 
 if __name__ == '__main__':

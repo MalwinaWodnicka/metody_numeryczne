@@ -30,7 +30,7 @@ def draw_function2(function, a, b, nodes=[]):
     pyplot.fill_between(x, y_vals, color='b', alpha=.2)
 
     for i, node_x in enumerate(nodes):
-        if i % 10 == 0:
+        if i % 5 == 0:
             node_y = function(node_x)
             pyplot.plot(node_x, node_y, 'ro', markersize=3)
 
@@ -126,29 +126,6 @@ def gauss_czebyszew(f, n):
 
 # Oblicza całkę w przedziale [-1, 1] metodą adaptacyjną
 # Dzieli przedział na mniejsze fragmenty aż do osiągnięcia żądanej dokładności
-# def simpson_limit(func, epsilon: float, wage_function) -> float:
-#     a = 0
-#     b = 0.5
-#     result = 0
-#     # granica do +1
-#     while True:
-#         integral = simpson(func, a, b, epsilon, wage_function)[0]
-#         result += integral
-#         a = b
-#         b = b + (1 - b) / 2
-#         if abs(integral) < epsilon:
-#             break
-#     # granica do -1
-#     a = -0.5
-#     b = 0
-#     while True:
-#         integral = simpson(func, a, b, epsilon, wage_function)[0]
-#         result += integral
-#         b = a
-#         a = a - (1 - abs(a)) / 2
-#         if abs(integral) < epsilon:
-#             break
-#     return round(result, 5)
 
 def simpson_limit(func, epsilon: float, wage_function):
     a = 0
