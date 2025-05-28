@@ -30,31 +30,37 @@ def main():
             print("Nie ma takiej opcji w menu")
             function_choice = None
     chosen_function = functions[int(function_choice) - 1][1]
-    while method_choice is None:
-        print("Wybierz metode")
-        print("\t1. Newton-Cotes")
-        print("\t2. Gauss-Czebyszew")
-        method_choice = input("\t>>>>")
-        if int(method_choice) not in range(1, 3):
-            print("Nie ma takiej opcji w menu")
+    while True:
+        while method_choice is None:
+            print("Wybierz metode")
+            print("\t1. Newton-Cotes")
+            print("\t2. Gauss-Czebyszew")
+            print("\t3. Wyjście")
+            method_choice = input("\t>>>>")
+            if int(method_choice) not in range(1, 4):
+                print("Nie ma takiej opcji w menu")
+                method_choice = None
+        if int(method_choice) == 1:
+            wage_function = lambda x: (1/((1-x**2)**(1/2)))
+            a = -1
+            b = 1
+            while float(e) <= 0:
+                print("Podaj dokladnosc")
+                e = input("\t>>>>")
+            result, nodes = fun4.simpson_limit(chosen_function, float(e), wage_function)
+            print(result)
+            fun4.draw_function2(chosen_function, a, b, nodes)
             method_choice = None
-    if int(method_choice) == 1:
-        wage_function = lambda x: (1/((1-x**2)**(1/2)))
-        a = -1
-        b = 1
-        while float(e) <= 0:
-            print("Podaj dokladnosc")
-            e = input("\t>>>>")
-        result, nodes = fun4.simpson_limit(chosen_function, float(e), wage_function)
-        print(result)
-        fun4.draw_function2(chosen_function, a, b, nodes)
-    else:
-        a, b = -0.99, 0.99
-        for n in range(2, 6):
-            result = fun4.gauss_czebyszew(chosen_function, n)
-            print(f"Wynik dla {n} węzłów: {round(result[0],5)}")
-            nodes = result[1]
-            fun4.draw_function(fun4.Function(lambda x: chosen_function(x)), float(a), float(b), nodes)
+        elif int(method_choice) == 2:
+            a, b = -0.99, 0.99
+            for n in range(2, 6):
+                result = fun4.gauss_czebyszew(chosen_function, n)
+                print(f"Wynik dla {n} węzłów: {round(result[0],5)}")
+                nodes = result[1]
+                fun4.draw_function(fun4.Function(lambda x: chosen_function(x)), float(a), float(b), nodes)
+            method_choice = None
+        else:
+            break
 
 
 if __name__ == '__main__':
