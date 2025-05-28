@@ -51,6 +51,7 @@ def main():
             print(result)
             fun4.draw_function2(chosen_function, a, b, nodes)
             method_choice = None
+            e = 0
         elif int(method_choice) == 2:
             a, b = -0.99, 0.99
             for n in range(2, 6):
